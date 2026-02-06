@@ -1,67 +1,100 @@
-=== Remove Category URL ===
-Contributors: valeriosza, �reativemotion
-Tags: categories, category base, category, permalinks, URL structure, links, seo, cms, wpml, URL
+=== Remove Category URL - Remove 'category' base from category permalinks ===
+Contributors: themeisle
+Tags: remove category url, remove category base, remove category prefix, permalinks, custom permalinks
 Requires at least: 3.1
-Tested up to: 5.3
-Stable tag: trunk
+Tested up to: 6.9
+Stable tag: 1.2.1
 License: GPLv2
 Donate link: 
 
-This plugin removes '/category' from your category permalinks. (e.g. `/category/my-category/` to `/my-category/`)
+Remove Category URL strips the /category/ base from your category URLs, turning something like /category/my-category/ into simply /my-category/.
 
 == Description ==
 
-This plugin will completely remove the '/category/' from your permalinks ( e.g. `mydomain.com/category/my-category/` to `mydomain.com/my-category/` ).
+Remove Category URL strips the `/category/` base from your category URLs, turning something like `/category/my-category/` into simply `/my-category/`.
 
-No configuration is required
+Just activate, and you're done. No configuration needed.
 
-= Features =
+### Features
+- Creates cleaner URLs like `mydomain.com/my-category/` and `mydomain.com/my-category/my-post/`
+- Works out of the box with no settings to configure
+- Supports multiple sub-categories
+- Automatically 301 redirects old category URLs to the new structure (SEO-friendly)
+- Sitemaps are automatically updated with the new URLs after activation
+- Compatible with WordPress Multisite, WPML, and popular sitemap plugins
 
-1. Better and logical permalinks like `mydomain.com/my-category/` and `mydomain.com/my-category/my-post/`.
-2. Simple plugin - No configuration is required.
-3. No need to modify wordpress files.
-4. Doesn't require other plugins to work.
-5. Compatible with sitemap plugins.
-6. Compatible with WPML.
-7. Works with multiple sub-categories.
-8. Works with WordPress Multisite.
-9. Redirects old category permalinks to the new ones (301 redirect, good for SEO).
+### Why remove /category/ from URLs?
 
-= Heads up: =
+The `/category/` base in WordPress URLs is there by default, but it doesn't help your visitors or search engines understand your content any better. When you remove `/category/` from URLs, you get cleaner paths like `mydomain.com/news/` instead of `mydomain.com/category/news/`. They're shorter, easier to remember and share, and more consistent with how your pages are already structured.
 
-Read the [FAQ](https://wordpress.org/plugins/remove-category-url/faq/) before use.
+Shorter URLs also tend to look better in search results and make your site feel more polished overall. Removing the category base is a small change that makes your whole URL structure cleaner.
 
-Want to help? Use the [support](https://wordpress.org/support/plugin/remove-category-url)
+### Support
+
+We’re here to help. Feel free to open a new thread on the [Support Forum](https://wordpress.org/support/plugin/remove-category-url/).
+
+### Useful Resources
+
+- If you like this plugin, you’re sure to love [our other plugins](https://themeisle.com/wordpress-plugins/) as well.
+- Our blog is a great place to [learn more about WordPress](https://themeisle.com/blog/).
+- Get the most out of your website with our helpful [WordPress YouTube Tutorials](https://youtube.com/playlist?list=PLmRasCVwuvpSep2MOsIoE0ncO9JE3FcKP).
 
 == Installation ==
 
-1. Upload `remove-category-url.zip` to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. That's it! You sould now be able to access your categories via http://mydomain.com/my-category/
+1. In your WordPress admin, go to **Plugins > Add New**
+2. In the Search field, type **"Remove Category URL"**
+3. Under "Remove Category URL" by Themeisle, click the **Install Now** link
+4. Once the process is complete, click the **Activate Plugin** link
+
+You're done! No configuration is needed.
 
 == Frequently Asked Questions ==
 
-= Why should I use this plugin? =
+= Will this break my existing links? =
 
-Use this plugin if you want to get rid of WordPress' "Category base" completely. The normal behaviour of WordPress is to add '/category' to your category permalinks if you leave "/category" blank in the Permalink settings. So your category links look like `mydomain.com/category/my-category/`. With this plugin your category links will look like `mydomain.com/my-category/` (or `mydomain.com/my-category/sub-category/` in case of sub categories).
+No. The plugin automatically redirects your old category URLs to the new shorter ones using 301 redirects. So if someone visits `mydomain.com/category/my-category/`, they'll be seamlessly redirected to `mydomain.com/my-category/`.
 
-= Will it break any other plugins? =
+= What happens if a page or other content has the same slug as a category? =
 
-As far as I can tell, no. I have been using this on several blogs for a while and it doesn't break anything.
+The category will take priority. So if you have both a category and a page with the slug travel, visiting `mydomain.com/travel/` will load the category archive, not the page. To avoid conflicts, make sure your categories don't share slugs with pages, posts, or other content on your site.
 
-= Won't this conflict with pages? =
+= Does this remove the base from other taxonomies like WooCommerce product categories? =
 
-Simply don't have a page and category with the same slug. Even if they do have the same slug it won't break anything, just the category will get priority (Say if a category and page are both 'xyz' then `mydomain.com/xyz/` will give you the category). This can have an useful side-effect. Suppose you have a category 'news', you can add a page 'news' which will show up in the page navigation but will show the 'news' category.
+No, this plugin only affects the built-in WordPress category taxonomy. For WooCommerce, you'd need a different solution.
 
-= The plugin has been uninstalled, but the slug /category/ did not reappear why? =
+= What happens if I deactivate the plugin? =
 
-A particular installation does not allow the rewrite feature in disabling the plugin. Try after disabling the plugin, save permanent links again.
+If you deactivate the plugin, your category URLs will revert to the default WordPress structure with `/category/` in the path.
 
-== Screenshots ==
+If you only deactivate the plugin without uninstalling it, you will need to flush permalinks manually. You can do this by going to **Settings > Permalinks** and clicking **Save Changes**.
 
-1. No Category URL
+If you uninstall the plugin, permalinks are flushed automatically.
+
+Note that after deactivation, links pointing to the shortened URLs will no longer work unless you set up your own redirects.
+
+= I uninstalled the plugin, but /category/ didn't come back. Why? =
+
+You'll need to manually refresh your permalinks. Go to **Settings → Permalinks** and click **Save Changes**. This will restore the default `/category/` base.
 
 == Changelog ==
+
+#####   Version 1.2.1 (2026-01-12)
+
+- Improved experience by flushing permalinks on uninstall
+- Enhanced security
+
+
+
+
+####   Version 1.2.0 (2025-11-06)
+
+Remove Category URL plugin has been acquired by Themeisle 🎉
+We’re happy to announce that Themeisle is now the new owner of Remove Category URL. This acquisition will help ensure the plugin’s continued development, better support, and exciting new updates in the future.
+
+Your existing setup will continue to work as usual — no action is required on your part.
+
+
+
 = 1.1.6 =
 * Fixed: Minor bugs
 

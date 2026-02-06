@@ -1,11 +1,11 @@
 <?php
 /**
  * Plugin Name: Remove Category URL
- * Plugin URI: http://valeriosouza.com.br/portfolio/remove-category-url/
- * Description: This plugin removes '/category' from your category permalinks. (e.g. `/category/my-category/` to `/my-category/`)
- * Version: 1.1.6
- * Author: Valerio Souza, Сreativemotion
- * Author URI: http://valeriosouza.com.br/
+ * Plugin URI: https://wordpress.org/plugins/remove-category-url/
+ * Description: This plugin removes '/category' from your category URLs. (e.g. `/category/my-category/` to `/my-category/`)
+ * Version: 1.2.1
+ * Author: Themeisle
+ * Author URI: https://themeisle.com
  * Text Domain: remove-category-url
  * Domain Path: /languages
  */
@@ -27,7 +27,6 @@ add_action( 'init', 'remove_category_url_permastruct' );
 add_filter( 'category_rewrite_rules', 'remove_category_url_rewrite_rules' );
 add_filter( 'query_vars', 'remove_category_url_query_vars' );    // Adds 'category_redirect' query variable
 add_filter( 'request', 'remove_category_url_request' );       // Redirects if 'category_redirect' is set
-add_filter( 'plugin_row_meta', 'remove_category_url_plugin_row_meta', 10, 4 );
 
 function remove_category_url_refresh_rules() {
 	global $wp_rewrite;
@@ -114,17 +113,42 @@ function remove_category_url_request( $query_vars ) {
 	if ( isset( $query_vars['category_redirect'] ) ) {
 		$catlink = trailingslashit( get_option( 'home' ) ) . user_trailingslashit( $query_vars['category_redirect'], 'category' );
 		status_header( 301 );
-		header( "Location: $catlink" );
+		header( "Location: " . esc_url_raw( $catlink ) );
 		exit;
 	}
 
 	return $query_vars;
 }
 
-function remove_category_url_plugin_row_meta( $links, $file ) {
-	if ( plugin_basename( __FILE__ ) === $file ) {
-		$links[] = sprintf( '<a target="_blank" href="%s">%s</a>', esc_url( 'https://valeriosouza.com.br/donate/' ), __( 'Donate', 'remove_category_url' ) );
+require_once trailingslashit( __DIR__ ) . '/vendor/autoload.php';
+
+
+add_filter( 'themeisle_sdk_products', function ( $products ) {
+	$products[] = __FILE__;
+
+	return $products;
+} );
+
+/**
+ * Adds plugin meta links.
+ *
+ * @param array $meta_fields The plugin meta fields.
+ * @param string $file The plugin file.
+ *
+ * @return array
+ */
+function add_plugin_review_link( $meta_fields, $file ) {
+	if ( plugin_basename( __FILE__ ) === $file && is_array( $meta_fields ) ) {
+		$svg = '<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-star"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>';
+
+		$meta_fields[] = sprintf(
+			'<a href="%s" target="_blank">%s<span class="dashicons dashicons-star-filled" style="font-size: 15px;"></span></a>',
+			esc_url( 'https://wordpress.org/support/plugin/remove-category-url/reviews/#new-post' ),
+			esc_html__( 'Found it useful? Rate the plugin', 'remove-category-url' ),
+		);
 	}
 
-	return $links;
+	return $meta_fields;
 }
+
+add_filter( 'plugin_row_meta', 'add_plugin_review_link', 10, 2 );

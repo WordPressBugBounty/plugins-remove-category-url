@@ -75,14 +75,8 @@ class Admin_Notices {
 		// Prefix from namespace constant
 		$this->prefix = 'wbcr_rmcaturl_';
 
-		$this->suggestions_message = '<b>%plugin% Suggestion:</b><br>Please install the ultimate version of the plugin to get more useful features to improve SEO.';
-		$this->suggestions         = array(
-			'clearfy' => array(
-				'name' => 'Clearfy - base Wordpress optimization in one plugin',
-				'desc' => 'This is a free plugin to optimize Wordpress. We recommend that you use it, because it performs complex optimization, improves SEO, improves securety of your site, speeds up your site without replacing the popular optimization plugins, but simply completing them. For example, you can extended YOAST SEO features at 30%, and speed optimization plug-ins by 15-20%! Clearfy will allow you to get rid of a large number of small plug-ins and reduce the load on your site. Try it, it\'s free!',
-				'url'  => 'https://clearfy.pro/?utm_source=wordpress.org&utm_campaign=cyr-and-lat',
-			)
-		);
+		$this->suggestions_message = '';
+		$this->suggestions         = array();
 
 		// Check notices
 		if ( is_admin() ) {
@@ -134,7 +128,7 @@ class Admin_Notices {
 	// ---------------------------------------------------------------------------------------------------
 
 	/**
-	 * Check and load the sugestions notices
+	 * Check and load the suggestions notices
 	 */
 	public function load_notices_suggestions() {
 		// Check the disable nag constant
@@ -162,13 +156,13 @@ class Admin_Notices {
 		?>
         <div class="<?php echo esc_attr( $this->prefix ); ?>-dismiss-suggestions notice notice-success is-dismissible"
              data-nonce="<?php echo esc_attr( wp_create_nonce( $this->prefix . '-dismiss-suggestions' ) ); ?>">
-            <p><?php echo str_replace( '%plugin%', $plugin_data['Name'], $this->suggestions_message ); ?></p>
+            <p><?php echo wp_kses_post( str_replace( '%plugin%', esc_html( $plugin_data['Name'] ), $this->suggestions_message ) ); ?></p>
             <ul><?php foreach ( $this->missing as $plugin ) : ?>
 
-                    <li><strong><?php echo $this->suggestions[ $plugin ]['name']; ?></strong>
+                    <li><strong><?php echo esc_html( $this->suggestions[ $plugin ]['name'] ); ?></strong>
                         <a href="<?php echo esc_url( $this->get_install_url( $plugin ) ); ?>">
                             (Install for free)
-                        </a><br/><?php echo $this->suggestions[ $plugin ]['desc']; ?></li>
+                        </a><br/><?php echo esc_html( $this->suggestions[ $plugin ]['desc'] ); ?></li>
 
 				<?php endforeach; ?></ul>
         </div>
@@ -382,7 +376,7 @@ class Admin_Notices {
 	}
 
 	/**
-	 * Removes dismissied option
+	 * Removes dismissed option
 	 */
 	private function delete_dismissed_timestamp( $key ) {
 		delete_option( $this->prefix . '_dismissed_' . $key . '_on' );

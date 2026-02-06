@@ -15,5 +15,5 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 remove_filter('category_rewrite_rules', 'remove_category_url_rewrite_rules');
-global $wp_rewrite;
-$wp_rewrite->flush_rules();
+flush_rewrite_rules( false );
+	
