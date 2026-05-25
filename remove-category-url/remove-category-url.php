@@ -3,7 +3,7 @@
  * Plugin Name: Remove Category URL
  * Plugin URI: https://wordpress.org/plugins/remove-category-url/
  * Description: This plugin removes '/category' from your category URLs. (e.g. `/category/my-category/` to `/my-category/`)
- * Version: 1.2.2
+ * Version: 1.2.3
  * Author: Themeisle
  * Author URI: https://themeisle.com
  * Text Domain: remove-category-url

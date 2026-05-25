@@ -1,11 +1,11 @@
 === Remove Category URL - Remove 'category' base from category permalinks ===
 Contributors: themeisle
-Tags: remove category url, remove category base, remove category prefix, permalinks, custom permalinks
+Tags: permalinks, category base, slug, taxonomy, seo
 Requires at least: 3.1
-Tested up to: 6.9
-Stable tag: 1.2.2
+Tested up to: 7.0
+Stable tag: 1.2.3
 License: GPLv2
-Donate link: 
+Donate link:
 
 Remove Category URL strips the /category/ base from your category URLs, turning something like /category/my-category/ into simply /my-category/.
 
@@ -77,6 +77,13 @@ Note that after deactivation, links pointing to the shortened URLs will no longe
 You'll need to manually refresh your permalinks. Go to **Settings → Permalinks** and click **Save Changes**. This will restore the default `/category/` base.
 
 == Changelog ==
+
+#####   Version 1.2.3 (2026-05-25)
+
+- Updated dependencies
+
+
+
 
 #####   Version 1.2.2 (2026-04-09)
 
