@@ -2,8 +2,8 @@
 Contributors: themeisle
 Tags: permalinks, category base, slug, taxonomy, seo
 Requires at least: 3.1
-Tested up to: 7.0
-Stable tag: 1.2.4
+Tested up to: 7.1
+Stable tag: 1.2.5
 License: GPLv2
 Donate link:
 
@@ -77,6 +77,13 @@ Note that after deactivation, links pointing to the shortened URLs will no longe
 You'll need to manually refresh your permalinks. Go to **Settings → Permalinks** and click **Save Changes**. This will restore the default `/category/` base.
 
 == Changelog ==
+
+#####   Version 1.2.5 (2026-10-19)
+
+- Updated dependencies
+
+
+
 
 #####   Version 1.2.4 (2026-07-29)
 
